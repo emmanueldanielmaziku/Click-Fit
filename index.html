@@ -1,0 +1,422 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Click Fit - Sports and Fitness</title>
+    <link rel="stylesheet" href="styles.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    />
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick.min.js"></script>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick.css"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick-theme.css"
+    />
+  </head>
+  <body>
+    <header>
+      <div class="container">
+        <div class="header-content">
+          <div class="logo">
+            <a href="#">Click Fit</a>
+          </div>
+          <nav class="desktop-nav">
+            <ul>
+              <li><a href="#" class="active">Workouts</a></li>
+              <li><a href="#">Nutrition</a></li>
+              <li><a href="#">Gear</a></li>
+              <li><a href="#">Blog</a></li>
+            </ul>
+          </nav>
+          <div class="header-right">
+            <div class="search-icon">
+              <i class="fas fa-search"></i>
+            </div>
+            <a href="#" class="login-btn">Login</a>
+            <div class="mobile-menu-toggle">
+              <i class="fas fa-bars"></i>
+            </div>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <div class="mobile-menu">
+      <ul>
+        <li><a href="#" class="active">Workouts</a></li>
+        <li><a href="#">Nutrition</a></li>
+        <li><a href="#">Gear</a></li>
+        <li><a href="#">Blog</a></li>
+      </ul>
+    </div>
+
+    <section class="hero">
+      <div class="container">
+        <div class="hero-content">
+          <div class="hero-text">
+            <h1>
+              Discover the World's Hidden <span class="highlight">Wonders</span>
+            </h1>
+            <p>
+              Find fitness routines and nutrition plans that ignite your
+              potential and transform your body. From high-intensity workouts to
+              mindful recovery techniques, we uncover the sports that turns
+              every step into a champion's story.
+            </p>
+            <a href="#" class="btn explore-btn">Explore now</a>
+          </div>
+          <div class="hero-images">
+            <div class="image-grid">
+              <div class="image-item img1"></div>
+              <div class="image-item img2"></div>
+              <div class="image-item img3"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Daily Fact Section -->
+    <section class="daily-fact">
+      <div class="container">
+        <h2>Today's Fitness Fact</h2>
+        <div class="fact-container">
+          <p id="fact-text">Loading today's interesting fact...</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Image Upload Section -->
+    <section class="image-upload-section">
+      <div class="container">
+        <h2>Share Your Fitness Journey</h2>
+        <p class="section-description">
+          Upload your workout photos, progress pics, or healthy meal
+          preparations to inspire others.
+        </p>
+
+        <div class="upload-container" id="uploadContainer">
+          <div class="upload-area" id="uploadArea">
+            <div class="upload-icon">
+              <i class="fas fa-cloud-upload-alt"></i>
+            </div>
+            <h3>Drag & Drop Images Here</h3>
+            <p>or</p>
+            <label for="fileInput" class="btn upload-btn">Browse Files</label>
+            <input
+              type="file"
+              id="fileInput"
+              accept="image/*"
+              multiple
+              hidden
+            />
+            <p class="upload-info">
+              Supported formats: JPG, PNG, GIF (Max size: 5MB)
+            </p>
+          </div>
+
+          <div class="upload-preview" id="uploadPreview">
+            <h3>Upload Preview</h3>
+            <div class="preview-container" id="previewContainer"></div>
+          </div>
+
+          <div class="upload-progress" id="uploadProgress">
+            <div class="progress-bar">
+              <div class="progress-fill" id="progressFill"></div>
+            </div>
+            <p class="progress-text" id="progressText">0%</p>
+          </div>
+
+          <div class="upload-actions">
+            <button class="btn upload-all-btn" id="uploadAllBtn">
+              Upload All
+            </button>
+            <button class="btn outline-btn clear-btn" id="clearBtn">
+              Clear All
+            </button>
+          </div>
+        </div>
+
+        <div class="upload-gallery" id="uploadGallery">
+          <h3>Recently Uploaded</h3>
+          <div class="gallery-container" id="galleryContainer"></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="top-destinations">
+      <div class="container">
+        <div class="section-header">
+          <h2>Top Fitness Categories</h2>
+          <div class="category-filters desktop-only">
+            <ul>
+              <li><a href="#" class="active">Popular</a></li>
+              <li><a href="#">HIIT</a></li>
+              <li><a href="#">Cardio</a></li>
+              <li><a href="#">Yoga</a></li>
+              <li><a href="#">Strength & Muscle Gain</a></li>
+              <li><a href="#">Running & Endurance</a></li>
+              <li><a href="#">Crossfit</a></li>
+              <li><a href="#" class="more-btn">More +</a></li>
+            </ul>
+          </div>
+          <div class="mobile-filter">
+            <select>
+              <option>Popular</option>
+              <option>HIIT</option>
+              <option>Cardio</option>
+              <option>Yoga</option>
+              <option>Strength & Muscle Gain</option>
+              <option>Running & Endurance</option>
+              <option>Crossfit</option>
+            </select>
+          </div>
+          <a href="#" class="view-all-link desktop-only"
+            >Explore all workouts</a
+          >
+        </div>
+
+        <div class="destination-cards">
+          <div class="destination-card">
+            <div class="card-image"></div>
+            <h3>Home Bodyweight Workouts</h3>
+            <p>15 mins</p>
+          </div>
+          <div class="destination-card">
+            <div class="card-image"></div>
+            <h3>Kettlebell Circuits</h3>
+            <p>30 mins</p>
+          </div>
+          <div class="destination-card">
+            <div class="card-image"></div>
+            <h3>HIIT Cardio Supersets</h3>
+            <p>25 mins</p>
+          </div>
+          <div class="destination-card">
+            <div class="card-image"></div>
+            <h3>Yoga Flow Sequences</h3>
+            <p>40 mins</p>
+          </div>
+        </div>
+
+        <div class="mobile-explore-all">
+          <a href="#" class="btn outline-btn">Explore all workouts</a>
+        </div>
+      </div>
+    </section>
+
+    <section class="latest-stories">
+      <div class="container">
+        <div class="section-header">
+          <h2>Latest Stories</h2>
+          <a href="#" class="view-all-link desktop-only">Read more articles</a>
+        </div>
+
+        <div class="stories-container">
+          <div class="main-story">
+            <div class="story-image"></div>
+            <div class="story-meta">
+              <span class="category">Food and Nutrition</span>
+            </div>
+            <h3>
+              Protein-packed meal prep guide: 10 things to try in your weekly
+              routine
+            </h3>
+            <div class="story-info">
+              <span class="author">By John Smith</span>
+              <span class="date">Sep 15, 2023</span>
+              <span class="read-time">5 min read</span>
+            </div>
+          </div>
+
+          <div class="side-stories">
+            <div class="side-story">
+              <div class="story-content">
+                <div class="story-meta">
+                  <span class="category">Training Tips</span>
+                </div>
+                <h3>
+                  15 Strength Training Mistakes You'll Want to Avoid for Better
+                  Results
+                </h3>
+                <div class="story-info">
+                  <span class="date">Aug 28, 2023</span>
+                  <span class="read-time">4 min read</span>
+                </div>
+              </div>
+              <div class="story-image1"></div>
+            </div>
+
+            <div class="side-story">
+              <div class="story-content">
+                <div class="story-meta">
+                  <span class="category">Health</span>
+                </div>
+                <h3>
+                  10 incredible habits around the world you can learn from
+                  athletes
+                </h3>
+                <div class="story-info">
+                  <span class="date">Aug 20, 2023</span>
+                  <span class="read-time">3 min read</span>
+                </div>
+              </div>
+              <div class="story-image2"></div>
+            </div>
+
+            <div class="side-story">
+              <div class="story-content">
+                <div class="story-meta">
+                  <span class="category">Trend Report</span>
+                </div>
+                <h3>
+                  Visiting Chicago's Gyms: Affordable Clubs and Boutique Studios
+                </h3>
+                <div class="story-info">
+                  <span class="date">Aug 15, 2023</span>
+                  <span class="read-time">6 min read</span>
+                </div>
+              </div>
+              <div class="story-image3"></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="mobile-read-more">
+          <a href="#" class="btn outline-btn">Read more articles</a>
+        </div>
+      </div>
+    </section>
+
+    <section class="trekkers-highlights">
+      <div class="container">
+        <h2>Fitness Highlights</h2>
+
+        <div class="highlight-card">
+          <div class="highlight-content">
+            <div class="highlight-author">
+              <div class="author-image"></div>
+              <div class="author-info">
+                <h4>Maria Angelica</h4>
+                <p>Yoga & Pilates Coach</p>
+              </div>
+            </div>
+            <div class="highlight-stars">
+              <i class="fas fa-star"></i>
+              <i class="fas fa-star"></i>
+              <i class="fas fa-star"></i>
+              <i class="fas fa-star"></i>
+              <i class="fas fa-star"></i>
+            </div>
+            <p class="highlight-text">
+              An unforgettable journey through fitness! Maria's approach to yoga
+              and pilates has transformed my body and mind. Her ability to make
+              poses flow smoothly helped me build strength and flexibility. The
+              progress I've made in just 3 months is incredible. I highly
+              recommend her classes to anyone looking to improve their physical
+              and mental wellbeing.
+            </p>
+          </div>
+          <div class="highlight-image">
+            <div class="play-button">
+              <i class="fas fa-play"></i>
+            </div>
+          </div>
+        </div>
+
+        <div class="highlight-navigation">
+          <a href="#" class="btn outline-btn">See more success stories</a>
+        </div>
+      </div>
+    </section>
+
+    <section class="newsletter">
+      <div class="container">
+        <h2>Get Your Fitness Inspiration</h2>
+        <h3>Straight to Your Inbox</h3>
+        <div class="newsletter-form">
+          <input type="email" placeholder="Your email" />
+          <button type="submit" class="btn">Subscribe</button>
+        </div>
+        <p class="newsletter-disclaimer">
+          Subscribe to our newsletter to receive exclusive promotions. Read our
+          <a href="#">Privacy Policy</a>.
+        </p>
+      </div>
+    </section>
+
+    <footer>
+      <div class="container">
+        <div class="footer-content">
+          <div class="footer-logo">
+            <h3>Click Fit</h3>
+            <div id="fact-footer"></div>
+            <div class="social-icons">
+              <a href="#"><i class="fab fa-facebook-f"></i></a>
+              <a href="#"><i class="fab fa-twitter"></i></a>
+              <a href="#"><i class="fab fa-instagram"></i></a>
+              <a href="#"><i class="fab fa-youtube"></i></a>
+              <a href="#"><i class="fab fa-pinterest"></i></a>
+            </div>
+          </div>
+
+          <div class="footer-links">
+            <div class="footer-column">
+              <h4>About Us</h4>
+              <ul>
+                <li><a href="#">Our Story</a></li>
+                <li><a href="#">Team</a></li>
+                <li><a href="#">Careers</a></li>
+                <li><a href="#">Press</a></li>
+              </ul>
+            </div>
+
+            <div class="footer-column">
+              <h4>Fitness Resources</h4>
+              <ul>
+                <li><a href="#">Workout Plans</a></li>
+                <li><a href="#">Nutrition Guides</a></li>
+                <li><a href="#">Recovery Tips</a></li>
+                <li><a href="#">Fitness Calculators</a></li>
+              </ul>
+            </div>
+
+            <div class="footer-column">
+              <h4>Top Destinations</h4>
+              <ul>
+                <li><a href="#">Home Workouts</a></li>
+                <li><a href="#">Gym Routines</a></li>
+                <li><a href="#">Outdoor Training</a></li>
+                <li><a href="#">Yoga Studios</a></li>
+              </ul>
+            </div>
+
+            <div class="footer-column">
+              <h4>Resources & Help</h4>
+              <ul>
+                <li><a href="#">Contact Us</a></li>
+                <li><a href="#">FAQ</a></li>
+                <li><a href="#">Privacy Policy</a></li>
+                <li><a href="#">Terms of Service</a></li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <div class="container">
+          <p>&copy; 2023 Click Fit. All rights reserved.</p>
+        </div>
+      </div>
+    </footer>
+
+    <script src="script.js"></script>
+  </body>
+</html>
