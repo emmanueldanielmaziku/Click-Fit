@@ -5,13 +5,13 @@ const fs = require("fs");
 const app = express();
 const port = 3000;
 
-// Serve static files
+
 app.use(express.static(__dirname));
 
-// Configure multer for file uploads
+// Configuring the multer for file uploads
 const uploadDir = path.join(__dirname, "upload_images");
 
-// Create upload directory if it doesn't exist
+
 if (!fs.existsSync(uploadDir)) {
   fs.mkdirSync(uploadDir, { recursive: true });
 }
@@ -21,14 +21,13 @@ const storage = multer.diskStorage({
     cb(null, uploadDir);
   },
   filename: (req, file, cb) => {
-    // Create unique filename with original extension
+  
     const uniqueSuffix = Date.now() + "-" + Math.round(Math.random() * 1e9);
     const ext = path.extname(file.originalname);
     cb(null, file.fieldname + "-" + uniqueSuffix + ext);
   },
 });
 
-// File filter to only accept images
 const fileFilter = (req, file, cb) => {
   if (file.mimetype.startsWith("image/")) {
     cb(null, true);
@@ -41,11 +40,11 @@ const upload = multer({
   storage: storage,
   fileFilter: fileFilter,
   limits: {
-    fileSize: 5 * 1024 * 1024, // 5MB limit
+    fileSize: 5 * 1024 * 1024,
   },
 });
 
-// Handle file uploads
+// Handling file uploads
 app.post("/upload", upload.single("image"), (req, res) => {
   try {
     if (!req.file) {
@@ -72,7 +71,7 @@ app.post("/upload", upload.single("image"), (req, res) => {
   }
 });
 
-// Handle multiple file uploads
+// Handling multiple file uploads
 app.post("/upload-multiple", upload.array("images", 10), (req, res) => {
   try {
     if (!req.files || req.files.length === 0) {
@@ -101,7 +100,7 @@ app.post("/upload-multiple", upload.array("images", 10), (req, res) => {
   }
 });
 
-// Start the server
+// Starting the server
 app.listen(port, () => {
   console.log(`Server running at http://localhost:${port}`);
 });

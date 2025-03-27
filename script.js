@@ -22,7 +22,7 @@ $(document).ready(() => {
     }
   });
 
-  // Smooth scrolling for anchor links
+  // Smooth scrolling for links
   $('a[href^="#"]').on("click", function (e) {
     e.preventDefault();
 
@@ -65,7 +65,7 @@ $(document).ready(() => {
     }
   });
 
-  // Fetch daily fact using AJAX
+  // Fetching daily fact using AJAX
   $.ajax({
     url: "http://numbersapi.com/1/30/date?json",
     type: "GET",
@@ -73,7 +73,6 @@ $(document).ready(() => {
     success: (data) => {
       $("#fact-text").html(data.text);
 
-      // Also add to another area in the page
       $("#fact-footer").html(
         "<h4>Today's Fitness Fact:</h4><p>" + data.text + "</p>"
       );
@@ -100,12 +99,12 @@ $(document).ready(() => {
 
   let filesToUpload = [];
 
-  // Open file dialog when clicking on upload area
+  // Opening file dialog when clicking on upload area
   uploadArea.addEventListener("click", () => {
     fileInput.click();
   });
 
-  // Handle drag and drop events
+  // Handling drag and drop events
   ["dragenter", "dragover", "dragleave", "drop"].forEach((eventName) => {
     uploadArea.addEventListener(eventName, preventDefaults, false);
   });
@@ -129,7 +128,7 @@ $(document).ready(() => {
     uploadArea.classList.remove("highlight");
   }
 
-  // Handle dropped files
+  // Handling dropped files
   uploadArea.addEventListener("drop", handleDrop, false);
 
   function handleDrop(e) {
@@ -179,17 +178,13 @@ $(document).ready(() => {
       removeBtn.className = "remove-btn";
       removeBtn.innerHTML = "×";
 
-      // Store file reference for removal
       previewItem.dataset.fileName = file.name;
 
       removeBtn.addEventListener("click", () => {
-        // Remove from preview
         previewItem.remove();
 
-        // Remove from files to upload
         filesToUpload = filesToUpload.filter((f) => f.name !== file.name);
 
-        // Hide preview container if empty
         if (previewContainer.children.length === 0) {
           uploadPreview.style.display = "none";
         }
@@ -203,7 +198,7 @@ $(document).ready(() => {
     reader.readAsDataURL(file);
   }
 
-  // Upload all files button
+  // Uploading all files button
   uploadAllBtn.addEventListener("click", () => {
     if (filesToUpload.length === 0) {
       alert("Please select files to upload first.");
@@ -212,83 +207,56 @@ $(document).ready(() => {
 
     uploadProgress.style.display = "block";
 
-    // Simulate upload progress
-    let progress = 0;
-    const totalFiles = filesToUpload.length;
-    let uploadedFiles = 0;
-
-    const progressInterval = setInterval(() => {
-      progress += 5;
-      progressFill.style.width = progress + "%";
-      progressText.textContent = progress + "%";
-
-      if (progress >= 100) {
-        clearInterval(progressInterval);
-        uploadedFiles++;
-
-        // Add to gallery
-        addToGallery(filesToUpload[uploadedFiles - 1]);
-
-        if (uploadedFiles < totalFiles) {
-          // Reset progress for next file
-          progress = 0;
-        } else {
-          // All files uploaded
-          setTimeout(() => {
-            uploadProgress.style.display = "none";
-            uploadPreview.style.display = "none";
-            previewContainer.innerHTML = "";
-            filesToUpload = [];
-            alert("All files uploaded successfully!");
-          }, 500);
-        }
-      }
-    }, 100);
-
-    // In a real application, you would use AJAX to send the files to the server
-    // Example of how the AJAX call would look:
-    /*
     const formData = new FormData();
-    filesToUpload.forEach(file => {
-        formData.append('images', file);
+    filesToUpload.forEach((file) => {
+      formData.append("images", file);
     });
 
     $.ajax({
-        url: '/upload-multiple',
-        type: 'POST',
-        data: formData,
-        processData: false,
-        contentType: false,
-        xhr: function() {
-            const xhr = new window.XMLHttpRequest();
-            xhr.upload.addEventListener('progress', function(e) {
-                if (e.lengthComputable) {
-                    const percent = Math.round((e.loaded / e.total) * 100);
-                    progressFill.style.width = percent + '%';
-                    progressText.textContent = percent + '%';
-                }
-            });
-            return xhr;
-        },
-        success: function(response) {
-            // Handle success
-            response.files.forEach(file => {
-                addToGallery(file);
-            });
+      url: "/upload-multiple",
+      type: "POST",
+      data: formData,
+      processData: false,
+      contentType: false,
+      xhr: function () {
+        const xhr = new window.XMLHttpRequest();
+        xhr.upload.addEventListener("progress", function (e) {
+          if (e.lengthComputable) {
+            const percent = Math.round((e.loaded / e.total) * 100);
+            progressFill.style.width = percent + "%";
+            progressText.textContent = percent + "%";
+          }
+        });
+        return xhr;
+      },
+      success: function (response) {
+        console.log("Server response:", response);
 
-            uploadProgress.style.display = 'none';
-            uploadPreview.style.display = 'none';
-            previewContainer.innerHTML = '';
-            filesToUpload = [];
-            alert('All files uploaded successfully!');
-        },
-        error: function() {
-            alert('Failed to upload files. Please try again.');
+        if (response.success) {
+          response.files.forEach((file) => {
+            const img = document.createElement("img");
+            img.src = file.path;
+            const galleryItem = document.createElement("div");
+            galleryItem.className = "gallery-item";
+            galleryItem.appendChild(img);
+            galleryContainer.appendChild(galleryItem);
+          });
+
+          uploadProgress.style.display = "none";
+          uploadPreview.style.display = "none";
+          previewContainer.innerHTML = "";
+          filesToUpload = [];
+          // alert("All files uploaded successfully!");
+        } else {
+          alert("Upload failed: " + response.message);
         }
+      },
+      error: function (xhr, status, error) {
+        console.log("Upload error:", error);
+        alert("Upload failed. Please try again.");
+      },
     });
-    */
   });
-
   // Clear all files button
   clearBtn.addEventListener("click", () => {
     previewContainer.innerHTML = "";
@@ -313,7 +281,7 @@ $(document).ready(() => {
     reader.readAsDataURL(file);
   }
 
-  // Add animations on scroll
+  // Scroll Animations
   $(window).scroll(() => {
     $(".destination-card, .side-story, .main-story").each(function () {
       const elementTop = $(this).offset().top;
@@ -335,13 +303,12 @@ $(document).ready(() => {
     });
   });
 
-  // Initialize animations
+  // Initializing animations
   $(".destination-card, .side-story, .main-story").css({
     opacity: "0",
     transform: "translateY(20px)",
     transition: "all 0.5s ease",
   });
 
-  // Trigger scroll once to initialize animations
   $(window).trigger("scroll");
 });
